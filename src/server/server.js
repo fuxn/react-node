@@ -1,3 +1,5 @@
+require('babel-register');
+
 import express from "express";
 import React from "react";
 import { match, RouterContext } from 'react-router'
@@ -19,6 +21,7 @@ app.get('/*', function (req, res) {
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
             let content = ReactDOMServer.renderToString(<RouterContext{...renderProps}/>);
+            console.log(content);
             res.status(200).render('index',{content:content});
         } else {
             res.status(404).send('Not found')
